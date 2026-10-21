@@ -2,27 +2,28 @@ name: Deploy MkDocs to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'docs/**'
       - 'mkdocs.yml'
+  workflow_dispatch:   # åŠ ä¸Šè¿™ä¸ªï¼Œåé¢å¯ä»¥æ‰‹åŠ¨ç‚¹Run workflowè§¦å‘
 jobs:
   deploy:
-    runs-on: ubuntu?latest
+    runs-on: ubuntu-latest
     steps:
-      - name: ¼ì³ö´úÂë
+      - name: æ£€å‡ºä»£ç 
         uses: actions/checkout@v4
-      - name: ÉèÖÃPython»·¾³
-        uses: actions/setup?python@v4
+      - name: è®¾ç½®Pythonç¯å¢ƒ
+        uses: actions/setup-python@v4
         with:
-          python?version: '3.9'
-      - name: °²×°MkDocs¼°Ö÷Ìâ
+          python-version: '3.9'
+      - name: å®‰è£…MkDocsåŠä¸»é¢˜
         run: |
-          pip install mkdocs?material
-      - name: ¹¹½¨¾²Ì¬ÎÄµµ
+          pip install mkdocs-material
+      - name: æ„å»ºé™æ€æ–‡æ¡£
         run: mkdocs build
-      - name: ²¿Êğµ½GitHub Pages
-        uses: JamesIves/github?pages?deploy?action@v4
+      - name: éƒ¨ç½²åˆ°GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh?pages
+          branch: gh-pages
           folder: site
